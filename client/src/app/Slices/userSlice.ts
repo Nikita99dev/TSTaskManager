@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userInteface } from "../types.ts/userTypes";
+import { userInteface } from "../types/userTypes";
 
 
 interface userI  {
