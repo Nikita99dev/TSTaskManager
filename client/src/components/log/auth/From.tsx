@@ -1,7 +1,14 @@
 import { Form, Input, Button, Checkbox } from 'antd';
+import { userInteface } from '../../../app/types/userTypes';
+import React, { ReactElement } from 'react';
 
-const Demo = () => {
-  const onFinish = (values: any) => {
+
+
+
+export default function RegForm(){
+
+
+  const onFinish = (values: userInteface) => {
     console.log('Success:', values);
   };
 
@@ -9,8 +16,10 @@ const Demo = () => {
     console.log('Failed:', errorInfo);
   };
 
+
+
   return (
-    <Form
+     <Form
       name="basic"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
@@ -19,6 +28,7 @@ const Demo = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+      <h1>Registration</h1>
       <Form.Item
         label="Username"
         name="username"
@@ -26,11 +36,13 @@ const Demo = () => {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item name="email" label="Email" rules={[{ required: true, type: 'email' }]}>
+        <Input />
+      </Form.Item>
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: 'Atleast 6 characters!', min: 6}]}
       >
         <Input.Password />
       </Form.Item>
@@ -45,7 +57,5 @@ const Demo = () => {
         </Button>
       </Form.Item>
     </Form>
-  );
-};
-
-export default Demo
+  )
+}
