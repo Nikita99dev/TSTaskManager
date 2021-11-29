@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./components/styles/GlobalStyle";
 import A from "./components/log/auth/smt";
 import { Flex } from "./components/styles/Flex.styled";
+import { Success } from "./components/supportingStuff/Success";
 
 const theme: DefaultTheme = {
   colors: {
@@ -30,9 +31,10 @@ function App() {
       <GlobalStyle/>
       <Flex>
         <Routes>
-          <Route path="/login"  element={<SignUp />} />
-          <Route path="/A"  element={<A />} />
+          <Route path="/signUp"  element={<SignUp />} />
+          <Route path="/login"  element={<A />} />
           <Route path="/" element={<SignUp />} />
+          <Route path='/success' element={<Success/>}/>
         </Routes>
         </Flex>
     </>

@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/signup', async (req, res) => {
   console.log('BACK', req.body);
   const { username, password,  email} = req.body;
-  console.log(money)
+
   
   try{
     const curUser = await User.findOne({where: {email}})

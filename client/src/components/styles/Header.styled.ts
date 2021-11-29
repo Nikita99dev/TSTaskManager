@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 export const StyledHeader = styled.div`
   background-color: blue;
-  padding: 20px 0;
+  padding: 20px ;
+  border-radius: 20px;
+  margin: 10px 30px 10px 30px;
 `;
 
 
@@ -11,7 +13,7 @@ export const StyledNav = styled.div`
   align-self: flex-end;
   justify-content: space-around;
   flex-direction: row;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   a{
     color: black;
@@ -20,6 +22,11 @@ export const StyledNav = styled.div`
 
   @media ( max-width: ${({theme})=>theme.mobile}){
     flex-direction: column;
+    align-items: center;
+
+    a{
+      margin: 5px;
+    }
   }
 
 `

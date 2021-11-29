@@ -1,22 +1,44 @@
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useState } from 'react';
 import { userInteface } from '../../../app/types/userTypes';
-import React, { ReactElement } from 'react';
+// import React, { ReactElement } from 'react';
+import { RegisterSubmitType } from './types/types';
+import {RuleObject} from "rc-field-form/lib/interface";
+import { useDispatch } from 'react-redux';
+import { actions } from '../../../app/rooReducer';
+import { useNavigate } from 'react-router';
 
 
 
 
 export default function RegForm(){
 
+  const navigate = useNavigate()
 
-  const onFinish = (values: userInteface) => {
+  const dispatch = useDispatch();
+
+  const onFinish: RegisterSubmitType = (values) => {
     console.log('Success:', values);
+    dispatch(actions.registerUserPending({values, navigate}))
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
+  const [checked, setChecked] = useState(false);
 
+  const onCheckboxChange = async (e: any) => {
+      await setChecked(e.target.checked);
+  };
+
+
+  const validation = ( rule: RuleObject, value: any, callback: (error?: string) => void) => {
+    if(checked) {
+        return callback()
+    }
+    return callback("Please accept the terms and conditions")
+};
 
   return (
      <Form
@@ -34,7 +56,7 @@ export default function RegForm(){
         name="username"
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item name="email" label="Email" rules={[{ required: true, type: 'email' }]}>
         <Input />
@@ -47,8 +69,8 @@ export default function RegForm(){
         <Input.Password />
       </Form.Item>
 
-      <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-        <Checkbox>Remember me</Checkbox>
+      <Form.Item name="remember" wrapperCol={{ offset: 8, span: 16 }}  rules={[{required: true,  validator: validation}]}>
+        <Checkbox onChange={onCheckboxChange} checked={checked}>Agree with terms and conditions</Checkbox>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
