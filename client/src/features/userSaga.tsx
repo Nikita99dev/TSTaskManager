@@ -1,15 +1,10 @@
 import { takeEvery, call, StrictEffect, put, takeLeading} from 'redux-saga/effects'
 import { actions } from '../app/rooReducer'
 import { userInteface }  from "../app/types/userTypes"
-import { regUser } from "../features/tools"
+import {  logUserTool, regUser } from "../features/tools"
+import { ILogAction, IRegAction } from './types.ts/types'
  
-interface IRegAction{
-  type: string,
-  payload: {
-    values: userInteface,
-    navigate: (a:any, b: any )=> void
-}
-}
+
 function* defineUser({payload}: IRegAction): Generator<StrictEffect>{
     console.log(payload.values)
   try {
@@ -23,7 +18,22 @@ function* defineUser({payload}: IRegAction): Generator<StrictEffect>{
   }
 }
 
+function* loginUser({payload}: ILogAction): Generator<StrictEffect>{
+  console.log(payload)
+
+  try {
+    const logUser = yield call(logUserTool, 'http://localhost:3001/users/login', payload)
+    if(logUser){
+      yield put(actions.loginUserFullfilled(logUser))
+    } else {
+      yield put(actions.loginUserRejected('nothing'))
+    }
+  } catch (error) {
+    yield put(actions.loginUserRejected(error))
+  }
+}
 
 export default function* UserSaga() {
   yield takeLeading(`${actions.registerUserPending}`, defineUser)
+  yield takeLeading(`${actions.loginUserPending}`, loginUser)
 }

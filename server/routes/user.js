@@ -25,4 +25,24 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res)=> {
+  console.log(req.body)
+  const {email, password} = req.body.values
+  console.log(email, password)
+
+  try {
+    const user = await User.findOne({where: {email, password}})
+    console.log(user)
+    if(user){
+      req.session.username = user.name
+      req.session.uid = user.id
+      return res.json({username: user.name, userId: user.id })
+    } else {
+      return res.json({error: 'something went wrong '})
+    }
+  } catch (error) {
+    
+  }
+})
+
 module.exports = router

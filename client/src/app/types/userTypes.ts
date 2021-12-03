@@ -3,3 +3,8 @@ export interface userInteface {
   email:string;
   password:string;
 }
+
+export interface logUserInteface {
+  username:string;
+  password:string;
+}

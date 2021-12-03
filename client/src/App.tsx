@@ -8,6 +8,7 @@ import GlobalStyle from "./components/styles/GlobalStyle";
 import A from "./components/log/auth/smt";
 import { Flex } from "./components/styles/Flex.styled";
 import { Success } from "./components/supportingStuff/Success";
+import LoginForm from "./components/log/auth/login/login";
 
 const theme: DefaultTheme = {
   colors: {
@@ -32,7 +33,7 @@ function App() {
       <Flex>
         <Routes>
           <Route path="/signUp"  element={<SignUp />} />
-          <Route path="/login"  element={<A />} />
+          <Route path="/login"  element={<LoginForm/>} />
           <Route path="/" element={<SignUp />} />
           <Route path='/success' element={<Success/>}/>
         </Routes>

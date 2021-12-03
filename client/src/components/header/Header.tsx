@@ -6,7 +6,7 @@ export default function HeaderMain() {
     <StyledHeader>
       <StyledNav>
           <Link to="/A">Todos</Link>
-          <Link to="/A">Login</Link>
+          <Link to="/login">Login</Link>
           <Link to="/signUp">SignUp</Link>
       </StyledNav>
     </StyledHeader>
