@@ -41,7 +41,7 @@ router.post('/login', async (req, res)=> {
       return res.json({error: 'something went wrong '})
     }
   } catch (error) {
-    
+    res.json({error})
   }
 })
 
