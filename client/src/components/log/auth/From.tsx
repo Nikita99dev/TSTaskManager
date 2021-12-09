@@ -72,7 +72,6 @@ export default function RegForm(){
       <Form.Item name="remember" wrapperCol={{ offset: 8, span: 16 }}  rules={[{required: true,  validator: validation}]}>
         <Checkbox onChange={onCheckboxChange} checked={checked}>Agree with terms and conditions</Checkbox>
       </Form.Item>
-
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
           Submit

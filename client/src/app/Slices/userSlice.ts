@@ -3,13 +3,13 @@ import { userInteface } from "../types/userTypes";
 
 
 interface userI  {
-  user: userInteface,
+  userData: userInteface,
   loader: boolean,
   error: string | null,
 }
 
 const initialState: userI = {
-  user: {username: '', email: '', password: ''},
+  userData: {username: '', email: '', password: ''},
   loader: false,
   error: null
 }
@@ -22,7 +22,7 @@ const userSlice = createSlice({
       state.loader = true
     },
     registersUserFullfilled: (state, action) => {
-      state.user = action.payload;
+      state.userData = action.payload;
       state.loader = false;
       state.error = null;
     },
@@ -36,7 +36,7 @@ const userSlice = createSlice({
     loginUserFullfilled: (state, action) => {
       state.loader = false;
       state.error = null;
-      state.user = action.payload
+      state.userData = action.payload
     }, 
     loginUserRejected: (state, action) => {
       state.error = action.payload;

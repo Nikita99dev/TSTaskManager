@@ -1,11 +1,11 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RegisterSubmitType } from '../types/types';
-import {RuleObject} from "rc-field-form/lib/interface";
-import { useDispatch } from 'react-redux';
 import { actions } from '../../../../app/rooReducer';
 import { useNavigate } from 'react-router';
 import { Container } from '../../../styles/Containet';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { Alert } from 'antd';
 
 
 
@@ -14,7 +14,7 @@ export default function LoginForm(){
 
   const navigate = useNavigate()
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onFinish: RegisterSubmitType = (values:any) => {
     console.log('Success:', values);
@@ -30,6 +30,9 @@ export default function LoginForm(){
   const onCheckboxChange = async (e: any) => {
       await setChecked(e.target.checked);
   };
+
+  const {user} = useAppSelector(state=>state)
+console.log(user)
 
   return (
     <Container>
@@ -58,6 +61,9 @@ export default function LoginForm(){
         <Checkbox onChange={onCheckboxChange} checked={checked}>Remember me</Checkbox>
       </Form.Item>
 
+      <Form.Item>
+      {user.error? <Alert message="Error Text" type="error" /> : null}
+      </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
           LOGIN
