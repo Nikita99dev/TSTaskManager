@@ -1,7 +1,7 @@
 export interface userInteface {
   username:string;
   email:string;
-  password:string;
+  password?:string;
 }
 
 export interface logUserInteface {

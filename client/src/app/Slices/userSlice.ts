@@ -9,7 +9,7 @@ interface userI  {
 }
 
 const initialState: userI = {
-  userData: {username: '', email: '', password: ''},
+  userData: {username: '', email: ''},
   loader: false,
   error: null
 }

@@ -62,7 +62,7 @@ console.log(user)
       </Form.Item>
 
       <Form.Item>
-      {user.error? <Alert message="Error Text" type="error" /> : null}
+      {user.error? <Alert message={user.error} type="error" /> : null}
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">

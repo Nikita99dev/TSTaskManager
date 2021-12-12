@@ -38,7 +38,7 @@ router.post('/login', async (req, res)=> {
       req.session.uid = user.id
       return res.json({username: user.name, userId: user.id })
     } else {
-      return res.error({error: 'wrong_data'})
+      return res.status(500).res.json({error: 'wrong_data'})
     }
   } catch (error) {
     res.json({error})

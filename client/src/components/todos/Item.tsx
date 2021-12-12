@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import React from "react";
 import styled from "styled-components";
 import { TodosI } from "../../app/types/TodosTypes";
@@ -12,10 +13,13 @@ interface ITitle{
   isComplite: boolean
 }
 
-export const Item: React.FC<TodosI> = ({body, isComplited}) => {
+export const Item: React.FC<TodosI> = ({body, isComplited, submit }) => {
   return (
     <Container>
-
+      <StyledTitle  isComplite={isComplited}>
+        {body}
+      </StyledTitle>
+      <Button onClick={submit} ></Button>
     </Container>
   )
 }

@@ -23,8 +23,10 @@ function* loginUser({payload}: ILogAction): Generator<StrictEffect>{
 
   try {
     const logUser = yield call(logUserTool, 'http://localhost:3001/users/login', payload)
+    console.log(logUser)
     if(logUser){
       yield put(actions.loginUserFullfilled(logUser))
+      payload.navigate('/A', {replace: true})
     } else {
       yield put(actions.loginUserRejected('nothing'))
     }

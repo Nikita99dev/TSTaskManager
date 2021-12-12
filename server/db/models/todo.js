@@ -10,14 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, {foreignKey: 'userID'})
+      this.belongsTo(models.User, {foreignKey: 'userId'})
     }
   };
   todo.init({
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     content: {
       type: DataTypes.STRING,
       allowNull: false

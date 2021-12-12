@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const FileStore = require('session-file-store')(session);
 const cors = require('cors')
 const usersRouter = require('./routes/user')
+const todosRouter = require('./routes/todos')
 
 const app = express();
 const PORT = 3001;
@@ -33,7 +34,7 @@ app.use(
 
 
 app.use('/users', usersRouter);
-
+app.use('/todos', todosRouter)
 
 
 app.listen(PORT, () => {

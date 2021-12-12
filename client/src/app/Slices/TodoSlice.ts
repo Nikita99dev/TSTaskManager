@@ -8,6 +8,7 @@ const initialState: TodoSliceI = {
 }
 
 interface TodoSliceI {
+  [x: string]: any;
   todos: TodosI[],
   isLoading: boolean,
   error: null
