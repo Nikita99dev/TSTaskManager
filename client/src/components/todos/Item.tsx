@@ -1,25 +1,30 @@
 import { Button } from "antd";
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../app/hooks";
 import { TodosI } from "../../app/types/TodosTypes";
 import { Container } from "../styles/Containet";
 
 const StyledTitle = styled.p<ITitle>`
   margin: 0;
-  text-decoration: ${(prop)=>(prop.isComplite? 'line-through' : 'none')};
+  text-decoration: ${(prop)=>(prop.isComplited? 'line-through' : 'none')};
 `
 
 interface ITitle{
-  isComplite: boolean
+  isComplited: boolean,
 }
 
-export const Item: React.FC<TodosI> = ({body, isComplited, submit }) => {
+
+export const Item: React.FC<TodosI> = ({body, isComplited, submit, id }) => {
+ 
+  const todos = useAppSelector(state=>state.todos)
+
   return (
     <Container>
-      <StyledTitle  isComplite={isComplited}>
+      <StyledTitle isComplited={isComplited}>
         {body}
       </StyledTitle>
-      <Button onClick={submit} ></Button>
+      <Button id={`${id}`} type="primary" onClick={submit} danger={isComplited?true:false}> {isComplited? "Undone": "Done"} </Button>
     </Container>
   )
 }

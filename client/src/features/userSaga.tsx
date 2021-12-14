@@ -1,7 +1,7 @@
 import { takeEvery, call, StrictEffect, put, takeLeading} from 'redux-saga/effects'
 import { actions } from '../app/rooReducer'
 import { userInteface }  from "../app/types/userTypes"
-import {  logUserTool, regUser } from "../features/tools"
+import {  initUserTood, logUserTool, regUser } from "../features/tools"
 import { ILogAction, IRegAction } from './types.ts/types'
  
 
@@ -35,7 +35,22 @@ function* loginUser({payload}: ILogAction): Generator<StrictEffect>{
   }
 }
 
+function* initUser():Generator<StrictEffect>{
+
+  try {
+    const user = yield call(initUserTood, 'http://localhost:3001/users/init')
+    if(user){
+      console.log(user,'init from backend')
+      yield put(actions.loginUserFullfilled(user))
+    }
+  } catch (error) {
+    yield put(actions.loginUserRejected(error))
+    
+  }
+}
+
 export default function* UserSaga() {
   yield takeLeading(`${actions.registerUserPending}`, defineUser)
   yield takeLeading(`${actions.loginUserPending}`, loginUser)
+  yield takeEvery(`${actions.initUserPending}`, initUser)
 }

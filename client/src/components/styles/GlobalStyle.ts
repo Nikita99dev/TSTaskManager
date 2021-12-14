@@ -7,12 +7,20 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  #root {
+    padding: 20px;
+  }
+
   body {
     background:${({theme})=>theme.colors.body};
     color: hsl(198, 100% 9%);
     font-family: 'Poppins', sans-serif;
     font-size: 1.15em;
-    margin: 0;
+    margin: 10px;
+    /* display: flex;
+    justify-content: center; */
+    /* display: flex;
+    justify-content: center; */
   }
 
   p{

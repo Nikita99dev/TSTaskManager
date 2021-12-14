@@ -5,6 +5,7 @@ export const StyledHeader = styled.div`
   padding: 20px ;
   border-radius: 20px;
   margin: 10px 30px 10px 30px;
+  min-width: 560;
 `;
 
 
@@ -14,6 +15,7 @@ export const StyledNav = styled.div`
   justify-content: space-around;
   flex-direction: row;
   margin-bottom: 10px;
+
 
   a{
     color: black;
@@ -27,6 +29,8 @@ export const StyledNav = styled.div`
     a{
       margin: 5px;
     }
+    
+
   }
 
 `

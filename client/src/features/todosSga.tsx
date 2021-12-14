@@ -1,23 +1,56 @@
 import { call, put, StrictEffect, takeLatest } from "redux-saga/effects";
 import { actions } from "../app/rooReducer";
 import { TodosI } from "../app/types/TodosTypes";
-import { createTodoTool } from "./tools";
+import { createTodoTool, changeTodoStatus, fetchTodosTool } from "./tools";
 
-function* createTodo ({ payload }: any): Generator<StrictEffect> {
-  console.log('payload from', payload)
-  try { 
-    const todo = yield call(createTodoTool, 'http://localhost:3001/todos/addTodos', payload)
-    console.log(todo)
-    if(todo){
-      yield put(actions.createTodoFulfilled(todo))
-    } 
+function* createTodo({ payload }: any): Generator<StrictEffect> {
+  console.log("payload from", payload);
+  let todo: any
+  try {
+    todo = yield call(
+      createTodoTool,
+      "http://localhost:3001/todos/addTodos",
+      payload
+    );
+      yield put(actions.createTodoFulfilled(todo));
   } catch (error) {
-    yield put(actions.createTodoRejected(error))
+    yield put(actions.createTodoRejected(error));
   }
 }
 
+function* changeTodoS({ payload }: any): Generator<StrictEffect> {
+  let val: any
+  try {
+     val = yield call(
+      changeTodoStatus,
+      "http://localhost:3001/todos/changeTodo",
+      payload
+    );
+    console.log("id from saga to change todo", val);
 
-export default function* SagaTodos(){
-  yield takeLatest(`${actions.createTodoPending}`, createTodo)
+      yield put(actions.changeTodoStatusFulfilled({...payload, isComplited: val}));
+
+  } catch (error) {
+    yield put(actions.changeTodoStatusRejected(error));
+  }
 }
- 
+
+function* fetchTodos({ payload }: any): Generator<StrictEffect> {
+  try {
+    const todos = yield call(
+      fetchTodosTool,
+      `http://localhost:3001/todos/fetchAll/${payload}`
+    );
+    console.log("todos", todos);
+    if (todos) {
+      yield put(actions.fetchTodosFulfilled(todos));
+    }
+  } catch (error) {
+    yield put(actions.fetchTodosRejected(error));
+  }
+}
+export default function* SagaTodos() {
+  yield takeLatest(`${actions.createTodoPending}`, createTodo);
+  yield takeLatest(`${actions.changeTodoStatusPending}`, changeTodoS);
+  yield takeLatest(`${actions.fetchTodosPending}`, fetchTodos);
+}

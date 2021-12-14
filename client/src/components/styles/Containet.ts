@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
   margin: 5em;
   padding: 3em;
   max-width: 400px;
@@ -27,5 +26,9 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     font-family: cursive;
+  }
+
+  button{
+    margin:  5px;
   }
 `

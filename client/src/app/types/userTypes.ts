@@ -1,4 +1,5 @@
 export interface userInteface {
+  userId?:any;
   username:string;
   email:string;
   password?:string;

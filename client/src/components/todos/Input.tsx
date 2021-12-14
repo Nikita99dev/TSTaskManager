@@ -12,11 +12,11 @@ interface InputI {
 
 export const Input: React.FC<InputI> = ({ input, submit, submit2 }) => {
   return (
-    <Flex>
+    <Container>
       <input value={input} onChange={submit}/>
       <Button type="primary" onClick={submit2}>
         Submit
       </Button>
-    </Flex>
+    </Container>
   );
 };

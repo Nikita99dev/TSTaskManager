@@ -14,7 +14,8 @@ export const MainTodos: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const submit2 = () => {
-    dispatch(actions.createTodoPending(input));
+    dispatch(actions.createTodoPending(input))
+    setInput("");
   };
 
 

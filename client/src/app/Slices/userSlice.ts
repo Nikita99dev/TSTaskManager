@@ -41,6 +41,9 @@ const userSlice = createSlice({
     loginUserRejected: (state, action) => {
       state.error = action.payload;
       state.loader = false
+    },
+    initUserPending: (state) => {
+      state.loader = true;
     }
   }
 })

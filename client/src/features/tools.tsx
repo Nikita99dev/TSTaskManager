@@ -56,3 +56,50 @@ export async function createTodoTool(url: string, todo: object){
     throw e
   }
 }
+
+
+export async function changeTodoStatus(url:string, todoId: any){
+  try {
+    const status = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(todoId)
+
+    })
+    if(status.status === 200){
+      return status.json()
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function fetchTodosTool (url: string){
+  try {
+    const todos = await fetch(url)
+
+    if(todos.status === 200){
+      return todos.json()
+    }
+  } catch (error) {
+    
+  }
+}
+
+
+export async function initUserTood(url: any){
+  try {
+    const initialUser = await fetch(url, {
+      credentials: "include"
+    })
+ 
+  if (initialUser.status === 200){
+    return initialUser.json()
+  } else return new Error('error')
+  } catch (error) {
+    throw error
+  }
+}

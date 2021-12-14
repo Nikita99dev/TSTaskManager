@@ -10,6 +10,10 @@ import { Flex } from "./components/styles/Flex.styled";
 import { Success } from "./components/supportingStuff/Success";
 import LoginForm from "./components/log/auth/login/login";
 import { MainTodos } from "./components/todos/Main";
+import { Container } from "./components/styles/Containet";
+import { useEffect } from "react";
+import { useAppDispatch } from "./app/hooks";
+import { actions } from "./app/rooReducer";
 
 const theme: DefaultTheme = {
   colors: {
@@ -23,8 +27,12 @@ const theme: DefaultTheme = {
 
 function App() {
 
+  const dispatch = useAppDispatch()
 
 
+useEffect(()=> {
+  dispatch(actions.initUserPending())
+},[dispatch])
 
   return (
     <ThemeProvider theme={theme}>
