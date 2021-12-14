@@ -103,3 +103,23 @@ export async function initUserTood(url: any){
     throw error
   }
 }
+
+
+export async function delTodo(url: string, id: any){
+  try {
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify(id)
+    })
+
+    if(res.status === 200){
+      return res.json()
+    }
+  } catch (error) {
+    throw error
+  }
+}

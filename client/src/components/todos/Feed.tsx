@@ -22,7 +22,7 @@ export const Feed: React.FC = () => {
 
   function submit2(e:any) {
     console.log(e.target.parentElement.id)
-    // dispatch(actions.changeTodoStatusPending({id:e.target.parentElement.id}))
+    dispatch(actions.deleteTodoPending({id:e.target.parentElement.id}))
   }
 
   useEffect(()=>{

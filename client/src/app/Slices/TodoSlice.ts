@@ -60,6 +60,18 @@ const TodoSlice = createSlice({
     fetchTodosRejected: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
+    },
+    deleteTodoPending: (state, action) => {
+      state.isLoading = true
+    },
+    deleteTodoFulfilled: (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.todos = state.todos.filter(el=>el.id !== +action.payload.id)
+    },
+    deleteTodoRejected: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload
     }
   }
 })

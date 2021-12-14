@@ -65,4 +65,23 @@ router.get("/fetchAll/:id", async (req, res) => {
   }
 })
 
+router.delete("/delete", async (req, res) => {
+
+  console.log(req.body)
+  const {id} = req.body
+  console.log(id)
+
+  try {
+    const del = await todo.destroy({where: {id}})
+    // console.log(del)
+    if(del){
+      res.json({id: id})
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (error) {
+    res.json(error)
+  }
+})
+
 module.exports = router;

@@ -1,7 +1,7 @@
-import { call, put, StrictEffect, takeLatest } from "redux-saga/effects";
+import { call, put, StrictEffect, takeEvery, takeLatest } from "redux-saga/effects";
 import { actions } from "../app/rooReducer";
 import { TodosI } from "../app/types/TodosTypes";
-import { createTodoTool, changeTodoStatus, fetchTodosTool } from "./tools";
+import { createTodoTool, changeTodoStatus, fetchTodosTool, delTodo } from "./tools";
 
 function* createTodo({ payload }: any): Generator<StrictEffect> {
   console.log("payload from", payload);
@@ -49,8 +49,21 @@ function* fetchTodos({ payload }: any): Generator<StrictEffect> {
     yield put(actions.fetchTodosRejected(error));
   }
 }
+
+
+function* deleteTodo({payload}: any): Generator<StrictEffect> {
+  console.log(payload)
+  try {
+    const res = yield call (delTodo, 'http://localhost:3001/todos/delete', payload )
+    yield put(actions.deleteTodoFulfilled(res))
+  } catch (error) {
+    yield put(actions.deleteTodoRejected(error))
+  }
+}
+
 export default function* SagaTodos() {
   yield takeLatest(`${actions.createTodoPending}`, createTodo);
   yield takeLatest(`${actions.changeTodoStatusPending}`, changeTodoS);
   yield takeLatest(`${actions.fetchTodosPending}`, fetchTodos);
+  yield takeEvery(`${actions.deleteTodoPending}`, deleteTodo)
 }
