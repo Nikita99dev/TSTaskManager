@@ -20,6 +20,10 @@ export const Feed: React.FC = () => {
     dispatch(actions.changeTodoStatusPending({id:e.target.parentElement.id}))
   }
 
+  function submit2(e:any) {
+    console.log(e.target.parentElement.id)
+    // dispatch(actions.changeTodoStatusPending({id:e.target.parentElement.id}))
+  }
 
   useEffect(()=>{
     if(user.userData.userId){
@@ -29,11 +33,10 @@ export const Feed: React.FC = () => {
 
   return (
     <div>
-      {todos.isLoading? <Loader/>:null}
-      {
+      {todos.isLoading? <Loader/>:
       todos?.todos?.length?
-      todos.todos?.map((todo:any)=><Item key={todo.id} body={todo.content}  isComplited={todo.isDone} id={todo.id} submit={submit}/>)
-      :<Empty />
+      todos.todos?.map((todo:any)=><Item key={todo.id} body={todo.content}  isComplited={todo.isDone} id={todo.id} submit={submit} submit2={submit2}/>)
+      : <Empty />
 }
 
     </div>

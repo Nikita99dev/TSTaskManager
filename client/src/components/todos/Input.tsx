@@ -12,11 +12,16 @@ interface InputI {
 
 export const Input: React.FC<InputI> = ({ input, submit, submit2 }) => {
   return (
+    <Flex>
+    <h1>Add new Todo </h1>
     <Container>
+      <div>
       <input value={input} onChange={submit}/>
+      </div>
       <Button type="primary" onClick={submit2}>
         Submit
       </Button>
     </Container>
+    </Flex>
   );
 };

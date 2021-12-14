@@ -8,6 +8,7 @@ import { Container } from "../styles/Containet";
 const StyledTitle = styled.p<ITitle>`
   margin: 0;
   text-decoration: ${(prop)=>(prop.isComplited? 'line-through' : 'none')};
+  color: ${(prop)=>(prop.isComplited? 'blue' : 'red')};
 `
 
 interface ITitle{
@@ -15,7 +16,7 @@ interface ITitle{
 }
 
 
-export const Item: React.FC<TodosI> = ({body, isComplited, submit, id }) => {
+export const Item: React.FC<TodosI> = ({body, isComplited, submit, id, submit2 }) => {
  
   const todos = useAppSelector(state=>state.todos)
 
@@ -25,6 +26,7 @@ export const Item: React.FC<TodosI> = ({body, isComplited, submit, id }) => {
         {body}
       </StyledTitle>
       <Button id={`${id}`} type="primary" onClick={submit} danger={isComplited?true:false}> {isComplited? "Undone": "Done"} </Button>
+      <Button id={`${id}`}  onClick={submit2} danger> Delete </Button>
     </Container>
   )
 }
